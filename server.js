@@ -5,7 +5,8 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
-const TURN_MS = 30000;
+const TURN_MS = 20000;
+const REACT_COOLDOWN_MS = 400;
 const COLORS = ["#E4572E", "#2E86AB", "#379956", "#8A4FD3", "#D81E77", "#0F8B8D"];
 
 let G = { phase: "setup" };
@@ -52,6 +53,15 @@ function publicState() {
 
 function broadcast() {
   const msg = "data: " + JSON.stringify({ state: publicState() }) + "\n\n";
+  for (const res of clients) res.write(msg);
+}
+
+// Reactions are fire-and-forget: not part of game state, just relayed to everyone.
+const ALLOWED_REACTIONS = ["🍅", "😭", "💀", "😏", "🫠", "🔥", "😱", "🤡"];
+const lastReactAt = new Map();
+
+function relayReaction(emoji, name) {
+  const msg = "data: " + JSON.stringify({ reaction: { emoji, name, at: Date.now() } }) + "\n\n";
   for (const res of clients) res.write(msg);
 }
 
@@ -241,6 +251,30 @@ const server = http.createServer((req, res) => {
       const ok = applyMove(seat, msg.type, msg.r, msg.c, false);
       if (!ok) return sendJson(res, { error: "illegal" }, 409);
       broadcast();
+      sendJson(res, { ok: true });
+    });
+    return;
+  }
+
+  if (req.method === "POST" && url === "/react") {
+    readJson(req, res, (msg) => {
+      if (!ALLOWED_REACTIONS.includes(msg.emoji)) {
+        return sendJson(res, { error: "unknown_reaction" }, 400);
+      }
+      const key = String(msg.token || "anon").slice(0, 64);
+      const now = Date.now();
+      if (now - (lastReactAt.get(key) || 0) < REACT_COOLDOWN_MS) {
+        return sendJson(res, { error: "too_fast" }, 429);
+      }
+      lastReactAt.set(key, now);
+
+      // Name the sender if their token matches a seat; spectators stay anonymous.
+      let name = "Someone";
+      if (G.players) {
+        const seat = G.players.findIndex((p) => p && p.token === msg.token);
+        if (seat >= 0) name = G.players[seat].name;
+      }
+      relayReaction(msg.emoji, name);
       sendJson(res, { ok: true });
     });
     return;
