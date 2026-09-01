@@ -46,7 +46,7 @@
     background-size:28px 28px,28px 28px,auto;
     min-height:100vh;
   }
-  main{max-width:1080px;margin:0 auto;padding:26px 20px 56px}
+  main{max-width:1080px;margin:0 auto;padding:26px 20px 110px}
   h1{
     font-family:"Caprasimo","Georgia",serif;font-weight:400;
     font-size:clamp(2.1rem,5vw,3.1rem);letter-spacing:.5px;margin:0;text-wrap:balance;
@@ -183,11 +183,13 @@
   #hgBody{transform-origin:20px 29px}
 
   /* ---------- reactions ---------- */
+  /* Pinned to the bottom of the viewport so it's always one click away. */
   .react-row{
-    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
-    margin:14px auto 0;padding:8px 10px;max-width:560px;
+    position:fixed;left:50%;bottom:16px;transform:translateX(-50%);
+    display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
+    padding:7px 10px;max-width:min(560px, calc(100vw - 24px));z-index:65;
     background:var(--card);border:1px solid var(--rule);border-radius:999px;
-    box-shadow:var(--shadow);
+    box-shadow:0 6px 22px rgba(0,0,0,.22);
   }
   .react-btn{
     display:flex;flex-direction:column;align-items:center;gap:1px;
@@ -251,7 +253,7 @@
 
   /* ---------- toast ---------- */
   #toast{
-    position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);
+    position:fixed;left:50%;bottom:98px;transform:translate(-50%,16px);
     background:var(--ink);color:var(--paper);padding:10px 22px;border-radius:999px;
     box-shadow:0 6px 24px rgba(0,0,0,.28);
     font-family:"Caveat",cursive;font-size:1.45rem;font-weight:700;
