@@ -14,77 +14,49 @@
     --ink-soft:#5C6873;
     --ink-faint:#93A0AC;
     --dot:#39434E;
-    --line-idle:#CBD6E0;
     --rule:#E3E9EF;
     --btn:#30588C;
     --btn-ink:#FFFFFF;
+    --warn:#D14A2B;
     --shadow:0 2px 10px rgba(40,49,60,.08);
     --turn:#E4572E;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#1B222B;
-      --graph:#28323E;
-      --card:#232D38;
-      --ink:#EAEFF4;
-      --ink-soft:#A2AFBC;
-      --ink-faint:#6E7B88;
-      --dot:#DCE4EC;
-      --line-idle:#3B4855;
-      --rule:#33404D;
-      --btn:#7FA8D9;
-      --btn-ink:#14202E;
-      --shadow:0 2px 12px rgba(0,0,0,.35);
+      --paper:#1B222B; --graph:#28323E; --card:#232D38;
+      --ink:#EAEFF4; --ink-soft:#A2AFBC; --ink-faint:#6E7B88;
+      --dot:#DCE4EC; --rule:#33404D; --btn:#7FA8D9; --btn-ink:#14202E;
+      --warn:#FF8A6A; --shadow:0 2px 12px rgba(0,0,0,.35);
     }
   }
   :root[data-theme="dark"]{
-    --paper:#1B222B;
-    --graph:#28323E;
-    --card:#232D38;
-    --ink:#EAEFF4;
-    --ink-soft:#A2AFBC;
-    --ink-faint:#6E7B88;
-    --dot:#DCE4EC;
-    --line-idle:#3B4855;
-    --rule:#33404D;
-    --btn:#7FA8D9;
-    --btn-ink:#14202E;
-    --shadow:0 2px 12px rgba(0,0,0,.35);
+    --paper:#1B222B; --graph:#28323E; --card:#232D38;
+    --ink:#EAEFF4; --ink-soft:#A2AFBC; --ink-faint:#6E7B88;
+    --dot:#DCE4EC; --rule:#33404D; --btn:#7FA8D9; --btn-ink:#14202E;
+    --warn:#FF8A6A; --shadow:0 2px 12px rgba(0,0,0,.35);
   }
   *{box-sizing:border-box}
   body{
-    margin:0;
-    color:var(--ink);
-    font-family:"Nunito Sans", "Segoe UI", system-ui, sans-serif;
+    margin:0; color:var(--ink);
+    font-family:"Nunito Sans","Segoe UI",system-ui,sans-serif;
     background:
       linear-gradient(var(--graph) 1px, transparent 1px),
       linear-gradient(90deg, var(--graph) 1px, transparent 1px),
       var(--paper);
-    background-size:28px 28px, 28px 28px, auto;
+    background-size:28px 28px,28px 28px,auto;
     min-height:100vh;
   }
-  main{max-width:1060px;margin:0 auto;padding:28px 20px 56px}
-
+  main{max-width:1080px;margin:0 auto;padding:26px 20px 56px}
   h1{
-    font-family:"Caprasimo", "Georgia", serif;
-    font-weight:400;
-    font-size:clamp(2.2rem,5vw,3.2rem);
-    letter-spacing:.5px;
-    margin:0;
-    text-wrap:balance;
+    font-family:"Caprasimo","Georgia",serif;font-weight:400;
+    font-size:clamp(2.1rem,5vw,3.1rem);letter-spacing:.5px;margin:0;text-wrap:balance;
   }
   .tagline{color:var(--ink-soft);margin:6px 0 0;font-size:1.02rem}
-  header.masthead{text-align:center;margin-bottom:26px}
+  header.masthead{text-align:center;margin-bottom:24px}
 
-  /* ---------- setup ---------- */
-  .setup-card{
-    background:var(--card);
-    border:1px solid var(--rule);
-    border-radius:14px;
-    box-shadow:var(--shadow);
-    max-width:560px;
-    margin:0 auto;
-    padding:26px 28px 30px;
+  .card{
+    background:var(--card);border:1px solid var(--rule);border-radius:14px;
+    box-shadow:var(--shadow);max-width:560px;margin:0 auto;padding:26px 28px 30px;
   }
   .step-label{
     font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
@@ -98,28 +70,14 @@
     font-size:1.3rem;font-weight:800;cursor:pointer;line-height:1;
   }
   .stepper button:hover{border-color:var(--btn)}
-  .stepper button:focus-visible, .len-card:focus-visible, .btn:focus-visible,
-  .name-row input:focus-visible, .ghost-btn:focus-visible, .me-row select:focus-visible{
-    outline:2px solid var(--btn);outline-offset:2px;
-  }
   .stepper .count{
     font-family:"Caprasimo",serif;font-size:1.8rem;min-width:2ch;text-align:center;
     font-variant-numeric:tabular-nums;
   }
-  .names{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-  .name-row{display:flex;align-items:center;gap:12px}
-  .swatch{
-    width:26px;height:26px;border-radius:7px;flex:none;
-    box-shadow:inset 0 0 0 2px rgba(0,0,0,.12);
+  button:focus-visible, input:focus-visible, a:focus-visible{
+    outline:2px solid var(--btn);outline-offset:2px;
   }
-  .name-row input{
-    flex:1;padding:10px 12px;border-radius:9px;
-    border:1.5px solid var(--rule);background:var(--paper);color:var(--ink);
-    font:inherit;font-weight:600;
-  }
-  .name-row input::placeholder{color:var(--ink-faint)}
   .hint{font-size:.85rem;color:var(--ink-soft);margin:10px 0 0}
-
   .len-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
   .len-card{
     border:1.5px solid var(--rule);border-radius:11px;background:var(--paper);
@@ -127,141 +85,159 @@
   }
   .len-card .mins{font-family:"Caprasimo",serif;font-size:1.5rem;display:block}
   .len-card .dots-info{display:block;font-size:.8rem;color:var(--ink-soft);margin-top:4px}
-  .len-card[aria-pressed="true"]{
-    border-color:var(--btn);
-    box-shadow:0 0 0 1.5px var(--btn) inset;
-  }
+  .len-card[aria-pressed="true"]{border-color:var(--btn);box-shadow:0 0 0 1.5px var(--btn) inset}
   .btn{
-    display:block;width:100%;margin-top:26px;padding:14px;
-    border:none;border-radius:11px;cursor:pointer;
-    background:var(--btn);color:var(--btn-ink);
+    display:block;width:100%;margin-top:26px;padding:14px;border:none;border-radius:11px;
+    cursor:pointer;background:var(--btn);color:var(--btn-ink);
     font-family:"Caprasimo",serif;font-size:1.15rem;letter-spacing:.4px;
   }
   .btn:hover{filter:brightness(1.08)}
-
-  /* ---------- game ---------- */
-  #screen-game{display:none}
-  .game-wrap{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
-  .board-col{flex:1 1 420px;max-width:660px;min-width:300px}
-  .board-frame{
-    position:relative;
-    background:var(--card);
-    border:1px solid var(--rule);
-    border-radius:16px;
-    box-shadow:var(--shadow);
-    padding:12px;
-  }
-  svg#board{display:block;width:100%;height:auto;touch-action:manipulation}
-
-  .turn-banner{
-    display:flex;align-items:center;gap:10px;justify-content:center;
-    margin:0 0 12px;font-weight:700;font-size:1.05rem;
-  }
-  .turn-banner .swatch{width:18px;height:18px;border-radius:5px}
-  .turn-banner .turn-name{font-family:"Caveat",cursive;font-size:1.5rem;font-weight:700}
-
-  /* board pieces */
-  .edge .hit{stroke:transparent;stroke-width:22;cursor:pointer}
-  .edge .stroke{
-    stroke:transparent;stroke-width:7;stroke-linecap:round;pointer-events:none;
-  }
-  .edge:not(.owned):hover .stroke,
-  .edge:not(.owned) .hit:focus-visible + .stroke{stroke:var(--turn);opacity:.4}
-  .edge.owned .hit{cursor:default}
-  .edge .hit:focus{outline:none}
-  circle.dot{fill:var(--dot)}
-  .box-initial{
-    font-family:"Caveat",cursive;font-weight:700;
-    user-select:none;pointer-events:none;
-  }
-
-  /* score panel */
-  .panel{
-    flex:0 1 280px;min-width:250px;
-    background:var(--card);border:1px solid var(--rule);border-radius:14px;
-    box-shadow:var(--shadow);padding:18px 18px 20px;
-  }
-  .panel h2{
-    margin:0 0 4px;font-family:"Caprasimo",serif;font-weight:400;font-size:1.25rem;
-  }
-  .claimed-note{font-size:.83rem;color:var(--ink-soft);margin:0 0 10px;font-variant-numeric:tabular-nums}
-  .mode-note{
-    font-size:.78rem;color:var(--ink-soft);margin:0 0 12px;
-    padding:7px 10px;border-radius:8px;background:var(--paper);border:1px dashed var(--rule);
-  }
-  .mode-note.live{border-style:solid}
-  .me-row{
-    display:flex;align-items:center;gap:8px;margin:0 0 14px;font-size:.85rem;font-weight:700;
-  }
-  .me-row select{
-    flex:1;padding:7px 8px;border-radius:8px;border:1.5px solid var(--rule);
-    background:var(--paper);color:var(--ink);font:inherit;font-weight:600;font-size:.85rem;
-  }
-  .pcard{
-    border:1.5px solid var(--rule);border-radius:11px;padding:10px 12px;margin-bottom:10px;
-    transition:border-color .2s, box-shadow .2s;
-  }
-  .pcard.active{border-color:var(--pc);box-shadow:0 0 0 1.5px var(--pc) inset}
-  .pcard .rowtop{display:flex;align-items:center;gap:10px}
-  .pcard .swatch{width:20px;height:20px;border-radius:6px}
-  .pcard .pname{font-weight:800;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .pcard .score{
-    font-family:"Caprasimo",serif;font-size:1.5rem;font-variant-numeric:tabular-nums;
-    min-width:1.5ch;text-align:right;
-  }
-  .pcard .tally{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;min-height:8px}
-  .pcard .tally i{width:8px;height:8px;border-radius:2px;background:var(--pc);display:block}
-  .pcard .turn-tag{
-    display:none;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--pc);margin-top:6px;
-  }
-  .pcard.active .turn-tag{display:block}
+  .btn[disabled]{opacity:.5;cursor:not-allowed;filter:none}
   .ghost-btn{
     display:block;width:100%;margin-top:8px;padding:10px;border-radius:10px;cursor:pointer;
     background:none;border:1.5px solid var(--rule);color:var(--ink-soft);font:inherit;font-weight:700;
   }
   .ghost-btn:hover{border-color:var(--btn);color:var(--ink)}
 
-  /* toast */
+  /* ---------- lobby ---------- */
+  .link-row{display:flex;gap:8px;margin-top:10px}
+  .link-row input{
+    flex:1;padding:11px 12px;border-radius:9px;border:1.5px solid var(--rule);
+    background:var(--paper);color:var(--ink);font:inherit;font-size:.9rem;
+  }
+  .link-row button{
+    padding:0 16px;border-radius:9px;border:1.5px solid var(--btn);
+    background:var(--btn);color:var(--btn-ink);font:inherit;font-weight:800;cursor:pointer;white-space:nowrap;
+  }
+  .name-entry{display:flex;gap:8px;margin-top:10px}
+  .name-entry input{
+    flex:1;padding:12px;border-radius:9px;border:1.5px solid var(--rule);
+    background:var(--paper);color:var(--ink);font:inherit;font-weight:600;
+  }
+  .seat-list{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:8px}
+  .seat-list li{
+    display:flex;align-items:center;gap:10px;padding:10px 12px;
+    border:1.5px solid var(--rule);border-radius:10px;font-weight:700;
+  }
+  .seat-list li.empty{border-style:dashed;color:var(--ink-faint);font-weight:600}
+  .seat-list .swatch{width:20px;height:20px;border-radius:6px;flex:none}
+  .seat-list .seat-no{
+    font-size:.72rem;font-weight:800;color:var(--ink-faint);letter-spacing:.1em;margin-left:auto;
+  }
+  .seat-list .you{
+    font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--btn);margin-left:auto;
+  }
+  .waiting{
+    text-align:center;margin:18px 0 0;font-family:"Caveat",cursive;
+    font-size:1.5rem;font-weight:700;color:var(--ink-soft);
+  }
+  .dots-anim::after{content:"";animation:dots 1.4s steps(4,end) infinite}
+  @keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+
+  /* ---------- game ---------- */
+  #screen-game{display:none}
+  .game-wrap{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+  .board-col{flex:1 1 420px;max-width:640px;min-width:300px}
+  .board-frame{
+    position:relative;background:var(--card);border:1px solid var(--rule);
+    border-radius:16px;box-shadow:var(--shadow);padding:12px;
+  }
+  svg#board{display:block;width:100%;height:auto;touch-action:manipulation}
+
+  .turn-bar{margin:0 0 12px}
+  .turn-line{
+    display:flex;align-items:center;gap:10px;justify-content:center;
+    font-weight:700;font-size:1.05rem;margin-bottom:8px;flex-wrap:wrap;
+  }
+  .turn-line .swatch{width:18px;height:18px;border-radius:5px}
+  .turn-line .turn-name{font-family:"Caveat",cursive;font-size:1.55rem;font-weight:700}
+  .clock{
+    font-family:"Caprasimo",serif;font-size:1.15rem;font-variant-numeric:tabular-nums;
+    min-width:3.2ch;text-align:right;
+  }
+  .clock.low{color:var(--warn)}
+  .timer-track{height:6px;border-radius:99px;background:var(--rule);overflow:hidden}
+  .timer-fill{
+    height:100%;border-radius:99px;background:var(--turn);
+    width:100%;transition:width .25s linear;
+  }
+  .timer-fill.low{background:var(--warn)}
+
+  .edge .hit{stroke:transparent;stroke-width:22;cursor:pointer}
+  .edge .stroke{stroke:transparent;stroke-width:7;stroke-linecap:round;pointer-events:none}
+  .edge:not(.owned).live:hover .stroke,
+  .edge:not(.owned).live .hit:focus-visible + .stroke{stroke:var(--turn);opacity:.4}
+  .edge:not(.live) .hit{cursor:default}
+  .edge.owned .hit{cursor:default}
+  .edge .hit:focus{outline:none}
+  circle.dot{fill:var(--dot)}
+  .box-initial{font-family:"Caveat",cursive;font-weight:700;user-select:none;pointer-events:none}
+
+  /* ---------- scorecard ---------- */
+  .panel{
+    flex:0 1 300px;min-width:270px;background:var(--card);
+    border:1px solid var(--rule);border-radius:14px;box-shadow:var(--shadow);padding:18px;
+  }
+  .panel h2{margin:0 0 4px;font-family:"Caprasimo",serif;font-weight:400;font-size:1.25rem}
+  .claimed-note{font-size:.83rem;color:var(--ink-soft);margin:0 0 14px;font-variant-numeric:tabular-nums}
+  .score-table{width:100%;border-collapse:collapse;font-size:.9rem}
+  .score-table th{
+    text-align:left;font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-faint);padding:0 6px 8px;border-bottom:1.5px solid var(--rule);
+  }
+  .score-table th.num, .score-table td.num{text-align:right}
+  .score-table td{padding:10px 6px;border-bottom:1px solid var(--rule);vertical-align:middle}
+  .score-table tr:last-child td{border-bottom:none}
+  .score-table tr.active td{background:color-mix(in srgb, var(--rowc) 12%, transparent)}
+  .who{display:flex;align-items:center;gap:8px}
+  .who .swatch{width:16px;height:16px;border-radius:5px;flex:none}
+  .who .nm{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:11ch}
+  .who .me{font-size:.6rem;font-weight:800;color:var(--ink-faint);letter-spacing:.08em}
+  .tally-cell{width:44%}
+  .tally-groups{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:flex-end}
+  .tally-groups svg{display:block;overflow:visible}
+  .pts{
+    font-family:"Caprasimo",serif;font-size:1.3rem;font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- toast ---------- */
   #toast{
     position:fixed;left:50%;top:22px;transform:translate(-50%,-16px);
-    background:var(--ink);color:var(--paper);
-    padding:10px 22px;border-radius:999px;box-shadow:var(--shadow);
-    font-family:"Caveat",cursive;font-size:1.45rem;font-weight:700;
+    background:var(--ink);color:var(--paper);padding:10px 22px;border-radius:999px;
+    box-shadow:var(--shadow);font-family:"Caveat",cursive;font-size:1.45rem;font-weight:700;
     opacity:0;pointer-events:none;z-index:60;white-space:nowrap;
     transition:opacity .18s, transform .18s;
   }
   #toast.show{opacity:1;transform:translate(-50%,0)}
   #toast .plus{color:var(--toast-c,#FFD166);margin-left:6px}
-
   .particle{position:absolute;width:9px;height:9px;border-radius:2px;pointer-events:none;z-index:50}
 
-  /* game over */
+  /* ---------- game over ---------- */
   #overlay{
     position:fixed;inset:0;background:rgba(20,26,33,.55);
     display:none;align-items:center;justify-content:center;z-index:100;padding:20px;
   }
   #overlay.show{display:flex}
   .over-card{
-    background:var(--card);border:1px solid var(--rule);border-radius:18px;
-    box-shadow:var(--shadow);padding:30px 32px;max-width:420px;width:100%;text-align:center;
+    background:var(--card);border:1px solid var(--rule);border-radius:18px;box-shadow:var(--shadow);
+    padding:30px 32px;max-width:420px;width:100%;text-align:center;
   }
   .over-card h2{font-family:"Caprasimo",serif;font-weight:400;font-size:2rem;margin:0}
   .winner-line{font-family:"Caveat",cursive;font-size:1.7rem;font-weight:700;margin:6px 0 18px}
-  .standings{list-style:none;padding:0;margin:0 0 8px;text-align:left}
+  .standings{list-style:none;padding:0;margin:0;text-align:left}
   .standings li{
-    display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px dashed var(--rule);
-    font-weight:700;font-variant-numeric:tabular-nums;
+    display:flex;align-items:center;gap:10px;padding:8px 4px;
+    border-bottom:1px dashed var(--rule);font-weight:700;font-variant-numeric:tabular-nums;
   }
   .standings li:last-child{border-bottom:none}
   .standings .swatch{width:16px;height:16px;border-radius:5px}
   .standings .s-name{flex:1}
-  .over-card .btn{margin-top:16px}
-  .over-card .ghost-btn{margin-top:10px}
 
-  @media (prefers-reduced-motion: reduce){
-    *{transition:none !important;animation:none !important}
+  .conn{
+    text-align:center;font-size:.78rem;color:var(--ink-faint);margin-top:18px;
   }
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
 </style>
 </head>
 <body>
@@ -271,18 +247,17 @@
     <p class="tagline">Dots &amp; squares, straight off the back page of a maths notebook.</p>
   </header>
 
-  <!-- SETUP -->
-  <section id="screen-setup" aria-label="Game setup">
-    <div class="setup-card">
-      <div class="step-label">1 · Players</div>
+  <!-- 1. HOST SETUP -->
+  <section id="screen-setup" style="display:none">
+    <div class="card">
+      <div class="step-label">1 · How many players</div>
       <div class="stepper">
         <button type="button" id="minus" aria-label="Fewer players">−</button>
         <span class="count" id="pcount">2</span>
         <button type="button" id="plus" aria-label="More players">+</button>
         <span class="hint" style="margin:0">2–6 players</span>
       </div>
-      <div class="names" id="names"></div>
-      <p class="hint">Colours are dealt at random — no swapping, no sulking.</p>
+      <p class="hint">Players type their own names when they open your link. Colours are dealt at random.</p>
 
       <div class="step-label">2 · Length of game</div>
       <div class="len-grid" id="lenGrid">
@@ -297,29 +272,58 @@
         </button>
       </div>
 
-      <button type="button" class="btn" id="startBtn">Start the game</button>
-      <p class="hint">One person sets up the game — everyone else on this link joins automatically.</p>
+      <button type="button" class="btn" id="createBtn">Create game &amp; get link</button>
     </div>
   </section>
 
-  <!-- GAME -->
-  <section id="screen-game" aria-label="Game board">
-    <div class="turn-banner" id="turnBanner"></div>
+  <!-- 2. LOBBY -->
+  <section id="screen-lobby" style="display:none">
+    <div class="card">
+      <div class="step-label">Share this link</div>
+      <div class="link-row">
+        <input id="shareLink" type="text" readonly aria-label="Game link">
+        <button type="button" id="copyBtn">Copy</button>
+      </div>
+
+      <div id="nameBlock">
+        <div class="step-label">Your name</div>
+        <div class="name-entry">
+          <input id="nameInput" maxlength="16" placeholder="Type your name" aria-label="Your name">
+          <button type="button" id="joinBtn" class="link-row-btn" style="padding:0 18px;border-radius:9px;border:1.5px solid var(--btn);background:var(--btn);color:var(--btn-ink);font:inherit;font-weight:800;cursor:pointer">Join</button>
+        </div>
+        <p class="hint" id="joinHint"></p>
+      </div>
+
+      <div class="step-label" style="margin-top:22px">Players</div>
+      <ul class="seat-list" id="seatList"></ul>
+      <p class="waiting dots-anim" id="waitingNote"></p>
+      <button type="button" class="ghost-btn" id="lobbyResetBtn">↺ Cancel &amp; set up a new game</button>
+    </div>
+  </section>
+
+  <!-- 3. GAME -->
+  <section id="screen-game">
+    <div class="turn-bar">
+      <div class="turn-line" id="turnLine"></div>
+      <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
+    </div>
     <div class="game-wrap">
       <div class="board-col">
         <div class="board-frame" id="boardFrame">
           <svg id="board" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
       </div>
-      <aside class="panel" aria-label="Scores">
+      <aside class="panel">
         <h2>Scorecard</h2>
         <p class="claimed-note" id="claimedNote"></p>
-        <p class="mode-note" id="modeNote">Connecting…</p>
-        <label class="me-row">I'm playing as
-          <select id="meSel"></select>
-        </label>
-        <div id="pcards"></div>
-        <button type="button" class="ghost-btn" id="restartBtn">↺ Back to setup</button>
+        <table class="score-table">
+          <thead>
+            <tr><th>Player</th><th class="tally-cell">Tally</th><th class="num">Pts</th></tr>
+          </thead>
+          <tbody id="scoreBody"></tbody>
+        </table>
+        <p class="conn" id="connNote"></p>
+        <button type="button" class="ghost-btn" id="gameResetBtn">↺ New game</button>
       </aside>
     </div>
   </section>
@@ -329,225 +333,272 @@
 
 <div id="overlay">
   <div class="over-card">
-    <h2 id="overTitle">Game over</h2>
+    <h2>Game over</h2>
     <p class="winner-line" id="winnerLine"></p>
     <ol class="standings" id="standings"></ol>
-    <button type="button" class="btn" id="againBtn">Play again — same players</button>
-    <button type="button" class="ghost-btn" id="newBtn">New game</button>
+    <button type="button" class="btn" id="againBtn">Set up a new game</button>
   </div>
 </div>
-
 <script>
 (function(){
   "use strict";
-
-  const COLORS = ["#E4572E","#2E86AB","#379956","#8A4FD3","#D81E77","#0F8B8D"];
-  const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (id)=>document.getElementById(id);
+  const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- live sync over Server-Sent Events ---------- */
-  const CLIENT_ID = Math.random().toString(36).slice(2) + Date.now().toString(36);
-  let live=false, firstEvent=true;
+  /* ---------- local identity ---------- */
+  function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
 
-  function connect(){
-    const es = new EventSource("/events");
-    es.onopen = ()=>{ live=true; updateModeNote(); };
-    es.onerror = ()=>{ live=false; updateModeNote(); }; // EventSource auto-reconnects
-    es.onmessage = (e)=>{
-      let m; try{ m=JSON.parse(e.data); }catch(err){ return; }
-      if(!m || !m.state) return;
-      if(m.sender===CLIENT_ID) return;        // our own move, already rendered
-      const isInitial = firstEvent; firstEvent=false;
-      applyRemote(m.state, isInitial);
-    };
+  let myToken  = lsGet("boxedin-token");
+  let mySeat   = lsGet("boxedin-seat") !== null ? +lsGet("boxedin-seat") : -1;
+  let myGameId = lsGet("boxedin-game");
+
+  function forgetSeat(){
+    lsDel("boxedin-token"); lsDel("boxedin-seat"); lsDel("boxedin-game");
+    myToken = null; mySeat = -1; myGameId = null;
   }
 
-  function updateModeNote(){
-    const note=$("modeNote");
-    note.classList.toggle("live", live);
-    note.textContent = live
-      ? "Live — moves sync to everyone on this link."
-      : "Reconnecting…";
-  }
+  /* ---------- state ---------- */
+  let S = null;              // latest server state
+  let live = false;
+  let skew = 0;              // serverNow - clientNow
+  let renderedKey = "";      // board signature, to avoid needless rebuilds
+  let seenEventId = "";
+  const M = 42, SP = 64;     // svg margin & dot spacing
+  const edgeEls = { h:[], v:[] };
 
-  function syncPublish(state){
-    fetch("/state", {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({sender:CLIENT_ID, state})
-    }).catch(()=>{});
-  }
+  /* ---------- host setup ---------- */
+  let seats = 2, dots = 6;
 
-  function currentState(phase, lastEvent){
-    return { phase, N, players, hE, vE, boxes, turn, claimed, lastEvent: lastEvent || null };
-  }
-
-  function applyRemote(st, isInitial){
-    if(!st.phase || st.phase==="setup" || !st.players){
-      backToSetup();
-      renderNames();
-      return;
-    }
-    players=st.players; N=st.N; hE=st.hE; vE=st.vE; boxes=st.boxes;
-    turn=st.turn; claimed=st.claimed; over=(st.phase==="over");
-    enterGame();
-    const ev=st.lastEvent;
-    if(!isInitial && ev && ev.type==="score" && players[ev.pi]){
-      showScoreToast(ev.pi, ev.count, ev.phrase||"Boxed it!");
-      if(ev.boxes) requestAnimationFrame(()=>ev.boxes.forEach(b=>burstAtBox(b[0],b[1],players[ev.pi].color)));
-    }
-    if(over) setTimeout(showGameOver, 600);
-    else $("overlay").classList.remove("show");
-  }
-
-  /* ---------- setup state ---------- */
-  let playerCount = 2;
-  let dealtColors = shuffle(COLORS.slice());
-  let dotsPerSide = 6;
-
-  function shuffle(a){
-    for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
-    return a;
-  }
-
-  function renderNames(){
-    const wrap = $("names");
-    const prev = [...wrap.querySelectorAll("input")].map(i=>i.value);
-    wrap.innerHTML = "";
-    for(let i=0;i<playerCount;i++){
-      const row = document.createElement("div");
-      row.className = "name-row";
-      const sw = document.createElement("span");
-      sw.className = "swatch";
-      sw.style.background = dealtColors[i];
-      const inp = document.createElement("input");
-      inp.maxLength = 16;
-      inp.placeholder = "Player " + (i+1);
-      inp.value = prev[i] || "";
-      inp.setAttribute("aria-label","Name of player " + (i+1));
-      row.append(sw, inp);
-      wrap.append(row);
-    }
-  }
-
-  $("minus").addEventListener("click", ()=>{ if(playerCount>2){playerCount--; redeal();} });
-  $("plus").addEventListener("click", ()=>{ if(playerCount<6){playerCount++; redeal();} });
-  function redeal(){
-    dealtColors = shuffle(COLORS.slice());
-    $("pcount").textContent = playerCount;
-    renderNames();
-  }
+  $("minus").addEventListener("click", ()=>{ if(seats>2){ seats--; $("pcount").textContent=seats; } });
+  $("plus").addEventListener("click", ()=>{ if(seats<6){ seats++; $("pcount").textContent=seats; } });
 
   $("lenGrid").addEventListener("click", (e)=>{
     const card = e.target.closest(".len-card");
     if(!card) return;
     [...$("lenGrid").children].forEach(c=>c.setAttribute("aria-pressed","false"));
     card.setAttribute("aria-pressed","true");
-    dotsPerSide = +card.dataset.dots;
+    dots = +card.dataset.dots;
   });
 
-  /* ---------- game state ---------- */
-  let players=[], N=6, hE=[], vE=[], boxes=[], turn=0, claimed=0, over=false;
-  let myIdx = -1; // -1 = pass & play (anyone can move from this screen)
-  const M=42, S=64; // svg margin & spacing
-  const edgeEls = { h:[], v:[] };
-
-  $("startBtn").addEventListener("click", ()=>{
-    const inputs=[...$("names").querySelectorAll("input")];
-    players = inputs.map((inp,i)=>({
-      name:(inp.value.trim()||("Player "+(i+1))),
-      color:dealtColors[i],
-      initial:(inp.value.trim()||("P"+(i+1)))[0].toUpperCase(),
-      score:0
-    }));
-    N = dotsPerSide;
-    freshBoardState();
-    enterGame();
-    syncPublish(currentState("playing", {type:"start"}));
+  $("createBtn").addEventListener("click", ()=>{
+    forgetSeat();
+    post("/create", {seats, dots});
   });
 
-  $("restartBtn").addEventListener("click", ()=>{
-    backToSetup();
-    syncPublish({phase:"setup"});
-  });
-  $("newBtn").addEventListener("click", ()=>{
-    $("overlay").classList.remove("show");
-    backToSetup();
-    syncPublish({phase:"setup"});
-  });
-  $("againBtn").addEventListener("click", ()=>{
-    $("overlay").classList.remove("show");
-    players.forEach(p=>p.score=0);
-    freshBoardState();
-    enterGame();
-    syncPublish(currentState("playing", {type:"start"}));
+  /* ---------- lobby ---------- */
+  $("shareLink").value = location.origin + location.pathname;
+
+  $("copyBtn").addEventListener("click", async ()=>{
+    const link = $("shareLink").value;
+    try{
+      await navigator.clipboard.writeText(link);
+      $("copyBtn").textContent = "Copied";
+    }catch(e){
+      $("shareLink").select();
+      $("copyBtn").textContent = "Press ⌘C";
+    }
+    setTimeout(()=>{ $("copyBtn").textContent="Copy"; }, 1800);
   });
 
-  function freshBoardState(){
-    hE = Array.from({length:N},()=>Array(N-1).fill(-1));
-    vE = Array.from({length:N-1},()=>Array(N).fill(-1));
-    boxes = Array.from({length:N-1},()=>Array(N-1).fill(-1));
-    turn=0; claimed=0; over=false;
+  $("joinBtn").addEventListener("click", doJoin);
+  $("nameInput").addEventListener("keydown", (e)=>{ if(e.key==="Enter") doJoin(); });
+
+  async function doJoin(){
+    const name = $("nameInput").value.trim();
+    if(!name){ $("joinHint").textContent = "Type a name first so everyone knows who's who."; return; }
+    $("joinBtn").disabled = true;
+    const res = await post("/join", {name, token:myToken});
+    $("joinBtn").disabled = false;
+    if(res && res.error === "full"){ $("joinHint").textContent = "All seats are taken for this game."; return; }
+    if(res && res.error === "not_open"){ $("joinHint").textContent = "This game has already started."; return; }
+    if(res && res.token){
+      myToken = res.token; mySeat = res.seat;
+      myGameId = S ? S.gameId : null;
+      lsSet("boxedin-token", myToken);
+      lsSet("boxedin-seat", String(mySeat));
+      if(myGameId) lsSet("boxedin-game", myGameId);
+      $("joinHint").textContent = "";
+    }
   }
 
-  function backToSetup(){
-    $("overlay").classList.remove("show");
-    $("screen-game").style.display="none";
-    $("screen-setup").style.display="";
+  $("lobbyResetBtn").addEventListener("click", resetGame);
+  $("gameResetBtn").addEventListener("click", resetGame);
+  $("againBtn").addEventListener("click", ()=>{ $("overlay").classList.remove("show"); resetGame(); });
+
+  function resetGame(){
+    forgetSeat();
+    overShown = false;
+    post("/reset", {});
   }
 
-  function enterGame(){
-    buildBoard();
-    paintExisting();
-    populateMeSel();
-    setTurn(turn);
-    renderPanel();
-    $("screen-setup").style.display="none";
-    $("screen-game").style.display="block";
+  /* ---------- transport ---------- */
+  async function post(url, body){
+    try{
+      const r = await fetch(url, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(body)
+      });
+      return await r.json();
+    }catch(e){ return null; }
   }
 
-  function px(c){ return M + c*S; }
+  function connect(){
+    const es = new EventSource("/events");
+    es.onopen = ()=>{ live=true; paintConn(); };
+    es.onerror = ()=>{ live=false; paintConn(); };
+    es.onmessage = (e)=>{
+      let m; try{ m=JSON.parse(e.data); }catch(err){ return; }
+      if(!m || !m.state) return;
+      live = true;
+      skew = m.state.now - Date.now();
+      apply(m.state);
+    };
+  }
+
+  function paintConn(){
+    $("connNote").textContent = live ? "Live · synced with everyone" : "Reconnecting…";
+  }
+
+  /* ---------- routing ---------- */
+  function apply(st){
+    const prev = S;
+    S = st;
+
+    // Identity belongs to one game only — a new game means a fresh seat.
+    if(st.phase === "setup"){
+      forgetSeat();
+      overShown = false;
+    }else if(myGameId && st.gameId && myGameId !== st.gameId){
+      forgetSeat();
+      overShown = false;
+    }
+
+    show("screen-setup", st.phase === "setup");
+    show("screen-lobby", st.phase === "lobby");
+    show("screen-game",  st.phase === "playing" || st.phase === "over");
+
+    if(st.phase === "setup"){
+      $("overlay").classList.remove("show");
+      return;
+    }
+    if(st.phase === "lobby"){ renderLobby(); $("overlay").classList.remove("show"); return; }
+
+    renderGame(prev);
+  }
+
+  function show(id, on){ $(id).style.display = on ? "block" : "none"; }
+
+  /* ---------- lobby render ---------- */
+  function renderLobby(){
+    const joined = S.players.filter(Boolean).length;
+    const iAmIn = mySeat >= 0 && S.players[mySeat];
+    $("nameBlock").style.display = iAmIn ? "none" : "block";
+
+    const ul = $("seatList");
+    ul.innerHTML = "";
+    S.players.forEach((p,i)=>{
+      const li = document.createElement("li");
+      if(p){
+        li.innerHTML =
+          `<span class="swatch" style="background:${p.color}"></span>
+           <span>${esc(p.name)}</span>` +
+          (i===mySeat ? `<span class="you">You</span>` : `<span class="seat-no">SEAT ${i+1}</span>`);
+      }else{
+        li.className = "empty";
+        li.innerHTML = `<span class="swatch" style="background:var(--rule)"></span>
+                        <span>Waiting for a player…</span><span class="seat-no">SEAT ${i+1}</span>`;
+      }
+      ul.append(li);
+    });
+
+    const left = S.seats - joined;
+    $("waitingNote").textContent = left > 0
+      ? `${joined} of ${S.seats} joined — waiting for ${left} more`
+      : "Everyone's in! Starting";
+  }
+
+  /* ---------- game render ---------- */
+  function renderGame(prev){
+    const key = S.N + ":" + S.seats + ":" + S.players.map(p=>p&&p.name).join(",");
+    if(key !== renderedKey){ buildBoard(); renderedKey = key; }
+
+    paintBoard();
+    renderScores();
+    renderTurnLine();
+    paintConn();
+
+    const total = (S.N-1)*(S.N-1);
+    $("claimedNote").textContent = S.claimed + " of " + total + " squares claimed";
+
+    // celebrate a newly-scored square exactly once
+    const ev = S.lastEvent;
+    if(ev && ev.type === "score"){
+      const id = ev.pi + ":" + JSON.stringify(ev.boxes) + ":" + S.claimed;
+      if(id !== seenEventId){
+        seenEventId = id;
+        showScoreToast(ev);
+        if(ev.boxes) requestAnimationFrame(()=>{
+          ev.boxes.forEach(b=>burstAtBox(b[0], b[1], S.players[ev.pi].color));
+        });
+      }
+    }else if(ev && ev.type === "timeout"){
+      const id = "t:" + ev.pi + ":" + S.turn + ":" + edgeCount();
+      if(id !== seenEventId){
+        seenEventId = id;
+        plainToast("Out of time — a line was played for " + S.players[ev.pi].name);
+      }
+    }
+
+    if(S.phase === "over") showGameOver(); else $("overlay").classList.remove("show");
+  }
+
+  function edgeCount(){
+    let n=0;
+    for(const row of S.hE) for(const v of row) if(v!==-1) n++;
+    for(const row of S.vE) for(const v of row) if(v!==-1) n++;
+    return n;
+  }
+
+  function px(c){ return M + c*SP; }
+  const NS = "http://www.w3.org/2000/svg";
 
   function buildBoard(){
     const svg = $("board");
-    const size = M*2 + (N-1)*S;
+    const N = S.N;
+    const size = M*2 + (N-1)*SP;
     svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
     svg.innerHTML = "";
-    const ns = "http://www.w3.org/2000/svg";
 
-    const boxLayer = document.createElementNS(ns,"g");
+    const boxLayer = document.createElementNS(NS,"g");
     boxLayer.id = "boxLayer";
     svg.append(boxLayer);
 
     edgeEls.h = Array.from({length:N},()=>Array(N-1).fill(null));
     edgeEls.v = Array.from({length:N-1},()=>Array(N).fill(null));
 
-    for(let r=0;r<N;r++) for(let c=0;c<N-1;c++) svg.append(makeEdge("h",r,c, px(c),px(r), px(c+1),px(r)));
-    for(let r=0;r<N-1;r++) for(let c=0;c<N;c++) svg.append(makeEdge("v",r,c, px(c),px(r), px(c),px(r+1)));
+    for(let r=0;r<N;r++) for(let c=0;c<N-1;c++)
+      svg.append(makeEdge("h",r,c, px(c),px(r), px(c+1),px(r)));
+    for(let r=0;r<N-1;r++) for(let c=0;c<N;c++)
+      svg.append(makeEdge("v",r,c, px(c),px(r), px(c),px(r+1)));
 
     for(let r=0;r<N;r++) for(let c=0;c<N;c++){
-      const d=document.createElementNS(ns,"circle");
+      const d = document.createElementNS(NS,"circle");
       d.setAttribute("class","dot");
       d.setAttribute("cx",px(c)); d.setAttribute("cy",px(r)); d.setAttribute("r",7);
       svg.append(d);
     }
-  }
-
-  function paintExisting(){
-    for(let r=0;r<N;r++) for(let c=0;c<N-1;c++) if(hE[r][c]!==-1) paintEdge("h",r,c,hE[r][c],false);
-    for(let r=0;r<N-1;r++) for(let c=0;c<N;c++) if(vE[r][c]!==-1) paintEdge("v",r,c,vE[r][c],false);
-    for(let r=0;r<N-1;r++) for(let c=0;c<N-1;c++){
-      if(boxes[r][c]!==-1) drawBox(r,c,boxes[r][c],false);
-    }
+    $("boxLayer").dataset.drawn = "";
   }
 
   function makeEdge(type,r,c,x1,y1,x2,y2){
-    const ns="http://www.w3.org/2000/svg";
-    const g=document.createElementNS(ns,"g");
+    const g = document.createElementNS(NS,"g");
     g.setAttribute("class","edge");
-    const hit=document.createElementNS(ns,"line");
+    const hit = document.createElementNS(NS,"line");
     hit.setAttribute("class","hit");
-    const vis=document.createElementNS(ns,"line");
+    const vis = document.createElementNS(NS,"line");
     vis.setAttribute("class","stroke");
     for(const l of [hit,vis]){
       l.setAttribute("x1",x1); l.setAttribute("y1",y1);
@@ -556,252 +607,268 @@
     hit.setAttribute("tabindex","0");
     hit.setAttribute("role","button");
     hit.setAttribute("aria-label",(type==="h"?"Horizontal":"Vertical")+" line, row "+(r+1)+", column "+(c+1));
-    const play=()=>tryMove(type,r,c);
-    hit.addEventListener("click",play);
-    hit.addEventListener("keydown",(e)=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();play();} });
+    const play = ()=>tryMove(type,r,c);
+    hit.addEventListener("click", play);
+    hit.addEventListener("keydown",(e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); play(); } });
     g.append(hit,vis);
     edgeEls[type][r][c] = g;
     return g;
   }
 
-  function paintEdge(type,r,c,pi,animate){
+  // Paint edges/boxes from server state; only touches what changed.
+  function paintBoard(){
+    const myTurn = (S.phase === "playing" && mySeat >= 0 && mySeat === S.turn);
+    for(let r=0;r<S.N;r++) for(let c=0;c<S.N-1;c++) paintEdge("h",r,c,S.hE[r][c],myTurn);
+    for(let r=0;r<S.N-1;r++) for(let c=0;c<S.N;c++) paintEdge("v",r,c,S.vE[r][c],myTurn);
+
+    const layer = $("boxLayer");
+    const drawn = new Set((layer.dataset.drawn||"").split("|").filter(Boolean));
+    for(let r=0;r<S.N-1;r++) for(let c=0;c<S.N-1;c++){
+      const owner = S.boxes[r][c];
+      const tag = r+","+c;
+      if(owner !== -1 && !drawn.has(tag)){
+        drawBox(r,c,owner, drawn.size>0 || S.claimed>0);
+        drawn.add(tag);
+      }
+    }
+    layer.dataset.drawn = [...drawn].join("|");
+  }
+
+  function paintEdge(type,r,c,owner,myTurn){
     const g = edgeEls[type][r][c];
     if(!g) return;
     const vis = g.querySelector(".stroke");
     const hit = g.querySelector(".hit");
-    g.classList.add("owned");
-    hit.removeAttribute("tabindex");
-    vis.style.stroke = players[pi].color;
+    if(owner !== -1){
+      if(!g.classList.contains("owned")){
+        g.classList.add("owned");
+        g.classList.remove("live");
+        hit.removeAttribute("tabindex");
+        vis.style.stroke = S.players[owner].color;
+        if(!REDUCED){
+          vis.style.strokeDasharray = SP;
+          vis.animate([{strokeDashoffset:SP},{strokeDashoffset:0}],
+                      {duration:160,easing:"ease-out",fill:"forwards"});
+          vis.style.strokeDashoffset = 0;
+        }
+      }
+    }else{
+      g.classList.toggle("live", myTurn);
+      if(myTurn) hit.setAttribute("tabindex","0"); else hit.removeAttribute("tabindex");
+    }
+  }
+
+  function drawBox(r,c,owner,animate){
+    const p = S.players[owner];
+    const g = document.createElementNS(NS,"g");
+    const rect = document.createElementNS(NS,"rect");
+    rect.setAttribute("x",px(c)+6); rect.setAttribute("y",px(r)+6);
+    rect.setAttribute("width",SP-12); rect.setAttribute("height",SP-12);
+    rect.setAttribute("rx",8);
+    rect.setAttribute("fill",p.color);
+    rect.setAttribute("opacity","0.16");
+    const t = document.createElementNS(NS,"text");
+    t.setAttribute("class","box-initial");
+    t.setAttribute("x",px(c)+SP/2); t.setAttribute("y",px(r)+SP/2);
+    t.setAttribute("text-anchor","middle");
+    t.setAttribute("dominant-baseline","central");
+    t.setAttribute("font-size",SP*0.56);
+    t.setAttribute("fill",p.color);
+    t.textContent = p.initial;
+    g.append(rect,t);
+    $("boxLayer").append(g);
     if(animate && !REDUCED){
-      vis.style.strokeDasharray = S;
-      vis.animate([{strokeDashoffset:S},{strokeDashoffset:0}],{duration:160,easing:"ease-out",fill:"forwards"});
-      vis.style.strokeDashoffset = 0;
+      g.style.transformOrigin = (px(c)+SP/2)+"px "+(px(r)+SP/2)+"px";
+      g.animate([{transform:"scale(.3)",opacity:0},
+                 {transform:"scale(1.12)",opacity:1,offset:.7},
+                 {transform:"scale(1)",opacity:1}],
+                {duration:320,easing:"ease-out"});
     }
   }
 
   function tryMove(type,r,c){
-    if(over) return;
-    const store = type==="h"?hE:vE;
+    if(!S || S.phase !== "playing") return;
+    if(mySeat < 0){ plainToast("You're watching this game, not playing it."); return; }
+    if(mySeat !== S.turn){ plainToast("Hold on — it's " + S.players[S.turn].name + "'s move."); return; }
+    const store = type === "h" ? S.hE : S.vE;
     if(store[r][c] !== -1) return;
-    if(myIdx >= 0 && myIdx !== turn){
-      plainToast("Hold on — it's " + players[turn].name + "'s move.");
+    post("/move", {token:myToken, type, r, c});
+  }
+
+  /* ---------- turn line & clock ---------- */
+  function renderTurnLine(){
+    const p = S.players[S.turn];
+    if(!p) return;
+    document.documentElement.style.setProperty("--turn", p.color);
+    const mine = mySeat === S.turn;
+    const who = mine
+      ? `<span class="turn-name" style="color:${p.color}">Your move</span>`
+      : `<span>Waiting on</span><span class="turn-name" style="color:${p.color}">${esc(p.name)}</span>`;
+    $("turnLine").innerHTML =
+      `<span class="swatch" style="background:${p.color}"></span>${who}
+       <span class="clock" id="clock"></span>`;
+    tickClock();
+  }
+
+  function tickClock(){
+    if(!S || S.phase !== "playing" || !S.turnStartedAt){
+      $("timerFill").style.width = "0%";
       return;
     }
-    store[r][c] = turn;
-    paintEdge(type,r,c,turn,true);
-    const p = players[turn];
-
-    const done=[];
-    const cand = type==="h" ? [[r-1,c],[r,c]] : [[r,c-1],[r,c]];
-    for(const [br,bc] of cand){
-      if(br<0||bc<0||br>=N-1||bc>=N-1) continue;
-      if(boxes[br][bc]===-1 && boxComplete(br,bc)) done.push([br,bc]);
+    const elapsed = (Date.now() + skew) - S.turnStartedAt;
+    const left = Math.max(0, S.turnMs - elapsed);
+    const secs = Math.ceil(left/1000);
+    const pct = Math.max(0, Math.min(100, (left/S.turnMs)*100));
+    const clock = $("clock");
+    const fill = $("timerFill");
+    if(clock){
+      clock.textContent = secs + "s";
+      clock.classList.toggle("low", secs <= 10);
     }
+    fill.style.width = pct + "%";
+    fill.classList.toggle("low", secs <= 10);
+  }
+  setInterval(tickClock, 250);
 
-    let lastEvent = {type:"move"};
-    if(done.length){
-      p.score += done.length;
-      claimed += done.length;
-      done.forEach(([br,bc])=>{ boxes[br][bc]=turn; drawBox(br,bc,turn,true); });
-      const phrase = PHRASES[Math.floor(Math.random()*PHRASES.length)];
-      lastEvent = {type:"score", pi:turn, count:done.length, phrase, boxes:done};
-      showScoreToast(turn, done.length, phrase);
-      renderPanel();
-      if(claimed === (N-1)*(N-1)){
-        over=true;
-        syncPublish(currentState("over", lastEvent));
-        setTimeout(showGameOver, 900);
-        return;
-      }
-      setTurn(turn); // extra turn
-    } else {
-      setTurn((turn+1)%players.length);
-      renderPanel();
+  /* ---------- scorecard with gate-5 tally ---------- */
+  function tallyGroup(count, color){
+    // count is 1..5 — four uprights plus a diagonal stroke on the fifth.
+    const W = 34, H = 26;
+    const parts = [];
+    for(let i=0;i<Math.min(count,4);i++){
+      const x = 4 + i*7;
+      parts.push(`<line x1="${x}" y1="4" x2="${x}" y2="${H-4}" />`);
     }
-    syncPublish(currentState("playing", lastEvent));
+    if(count === 5){
+      parts.push(`<line x1="0" y1="${H-3}" x2="${W-4}" y2="3" />`);
+    }
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true"
+      stroke="${color}" stroke-width="2.4" stroke-linecap="round">${parts.join("")}</svg>`;
   }
 
-  function boxComplete(r,c){
-    return hE[r][c]!==-1 && hE[r+1][c]!==-1 && vE[r][c]!==-1 && vE[r][c+1]!==-1;
+  function tallyMarks(score, color){
+    if(!score) return `<span style="color:var(--ink-faint);font-size:.85rem">—</span>`;
+    const groups = [];
+    let left = score;
+    while(left > 0){ groups.push(Math.min(5,left)); left -= Math.min(5,left); }
+    return groups.map(g=>tallyGroup(g,color)).join("");
   }
 
-  function drawBox(r,c,pi,animate){
-    const ns="http://www.w3.org/2000/svg";
-    const p=players[pi];
-    const g=document.createElementNS(ns,"g");
-    const rect=document.createElementNS(ns,"rect");
-    rect.setAttribute("x",px(c)+6); rect.setAttribute("y",px(r)+6);
-    rect.setAttribute("width",S-12); rect.setAttribute("height",S-12);
-    rect.setAttribute("rx",8);
-    rect.setAttribute("fill",p.color);
-    rect.setAttribute("opacity","0.16");
-    const t=document.createElementNS(ns,"text");
-    t.setAttribute("class","box-initial");
-    t.setAttribute("x",px(c)+S/2); t.setAttribute("y",px(r)+S/2);
-    t.setAttribute("text-anchor","middle");
-    t.setAttribute("dominant-baseline","central");
-    t.setAttribute("font-size",S*0.56);
-    t.setAttribute("fill",p.color);
-    t.textContent=p.initial;
-    g.append(rect,t);
-    $("boxLayer").append(g);
-    if(animate && !REDUCED){
-      g.style.transformOrigin = (px(c)+S/2)+"px "+(px(r)+S/2)+"px";
-      g.animate([{transform:"scale(.3)",opacity:0},{transform:"scale(1.12)",opacity:1,offset:.7},{transform:"scale(1)",opacity:1}],
-        {duration:320,easing:"ease-out"});
-      burstAtBox(r,c,p.color);
-    }
+  function renderScores(){
+    const body = $("scoreBody");
+    body.innerHTML = "";
+    S.players.forEach((p,i)=>{
+      if(!p) return;
+      const tr = document.createElement("tr");
+      if(i === S.turn && S.phase === "playing") tr.className = "active";
+      tr.style.setProperty("--rowc", p.color);
+      tr.innerHTML =
+        `<td>
+           <div class="who">
+             <span class="swatch" style="background:${p.color}"></span>
+             <span class="nm">${esc(p.name)}</span>
+             ${i===mySeat ? '<span class="me">(you)</span>' : ''}
+           </div>
+         </td>
+         <td class="tally-cell"><div class="tally-groups">${tallyMarks(p.score, p.color)}</div></td>
+         <td class="num"><span class="pts">${p.score}</span></td>`;
+      body.append(tr);
+    });
   }
 
   /* ---------- effects ---------- */
-  const PHRASES=["Boxed it!","Square secured!","That one's mine!","Snapped it up!","Claimed!","Fenced in!","Got one!"];
-  let toastTimer=null;
+  const PHRASES = ["Boxed it!","Square secured!","Snapped it up!","Claimed!","Fenced in!","Got one!"];
+  let toastTimer = null;
 
-  function showScoreToast(pi,count,phrase){
-    const p=players[pi];
-    const pts = count>1 ? `Double! +${count}` : "+1";
-    const toast=$("toast");
+  function showScoreToast(ev){
+    const p = S.players[ev.pi];
+    if(!p) return;
+    const pts = ev.count > 1 ? `Double! +${ev.count}` : "+1";
+    const phrase = PHRASES[(ev.pi + S.claimed) % PHRASES.length];
+    const toast = $("toast");
     toast.style.setProperty("--toast-c", p.color);
-    toast.innerHTML = `${escapeHtml(p.name)} — ${escapeHtml(phrase)} <span class="plus">${pts} · extra turn</span>`;
+    const who = ev.pi === mySeat ? "You" : esc(p.name);
+    toast.innerHTML = `${who} — ${phrase} <span class="plus">${pts} · extra turn</span>`;
     toast.classList.add("show");
     clearTimeout(toastTimer);
-    toastTimer=setTimeout(()=>toast.classList.remove("show"), 1700);
+    toastTimer = setTimeout(()=>toast.classList.remove("show"), 1700);
   }
 
   function plainToast(msg){
-    const toast=$("toast");
+    const toast = $("toast");
     toast.style.removeProperty("--toast-c");
     toast.textContent = msg;
     toast.classList.add("show");
     clearTimeout(toastTimer);
-    toastTimer=setTimeout(()=>toast.classList.remove("show"), 2000);
+    toastTimer = setTimeout(()=>toast.classList.remove("show"), 2000);
   }
 
   function burstAtBox(r,c,color){
     if(REDUCED) return;
-    const svg=$("board"), frame=$("boardFrame");
-    const fr=frame.getBoundingClientRect(), sr=svg.getBoundingClientRect();
-    const size = M*2 + (N-1)*S;
+    const svg = $("board"), frame = $("boardFrame");
+    const fr = frame.getBoundingClientRect(), sr = svg.getBoundingClientRect();
+    const size = M*2 + (S.N-1)*SP;
     const scale = sr.width/size;
-    const cx = sr.left - fr.left + (px(c)+S/2)*scale;
-    const cy = sr.top - fr.top + (px(r)+S/2)*scale;
+    const cx = sr.left - fr.left + (px(c)+SP/2)*scale;
+    const cy = sr.top  - fr.top  + (px(r)+SP/2)*scale;
     for(let i=0;i<14;i++){
-      const s=document.createElement("span");
-      s.className="particle";
-      s.style.background=color;
-      s.style.left=cx+"px"; s.style.top=cy+"px";
+      const s = document.createElement("span");
+      s.className = "particle";
+      s.style.background = color;
+      s.style.left = cx+"px"; s.style.top = cy+"px";
       frame.append(s);
-      const ang=Math.random()*Math.PI*2, dist=40+Math.random()*55;
-      const dx=Math.cos(ang)*dist, dy=Math.sin(ang)*dist;
+      const ang = Math.random()*Math.PI*2, dist = 40+Math.random()*55;
+      const dx = Math.cos(ang)*dist, dy = Math.sin(ang)*dist;
       s.animate(
         [{transform:"translate(0,0) rotate(0deg)",opacity:1},
          {transform:`translate(${dx}px,${dy}px) rotate(${Math.random()*360-180}deg)`,opacity:0}],
         {duration:520+Math.random()*250,easing:"cubic-bezier(.2,.7,.4,1)"}
-      ).onfinish=()=>s.remove();
+      ).onfinish = ()=>s.remove();
     }
   }
 
-  /* ---------- identity ---------- */
-  function populateMeSel(){
-    const sel=$("meSel");
-    sel.innerHTML="";
-    const opt=document.createElement("option");
-    opt.value="-1"; opt.textContent="Pass & play (anyone)";
-    sel.append(opt);
-    players.forEach((p,i)=>{
-      const o=document.createElement("option");
-      o.value=String(i); o.textContent=p.name;
-      sel.append(o);
-    });
-    let saved=null;
-    try{ saved = localStorage.getItem("boxedin-me"); }catch(e){}
-    if(saved!==null){
-      const idx = players.findIndex(p=>p.name===saved);
-      if(idx>=0){ myIdx=idx; sel.value=String(idx); }
-      else { myIdx=-1; sel.value="-1"; }
-    } else { myIdx=-1; sel.value="-1"; }
-    sel.onchange=()=>{
-      myIdx = +sel.value;
-      try{
-        if(myIdx>=0) localStorage.setItem("boxedin-me", players[myIdx].name);
-        else localStorage.removeItem("boxedin-me");
-      }catch(e){}
-    };
-  }
-
-  /* ---------- panel & turn ---------- */
-  function setTurn(i){
-    turn=i;
-    const p=players[i];
-    $("board").style.setProperty("--turn",p.color);
-    document.documentElement.style.setProperty("--turn",p.color);
-    $("turnBanner").innerHTML =
-      `<span class="swatch" style="background:${p.color}"></span>
-       <span>Your move,</span><span class="turn-name" style="color:${p.color}">${escapeHtml(p.name)}</span>`;
-    renderPanel();
-  }
-
-  function renderPanel(){
-    const total=(N-1)*(N-1);
-    $("claimedNote").textContent = claimed+" of "+total+" squares claimed";
-    const wrap=$("pcards");
-    wrap.innerHTML="";
-    players.forEach((p,i)=>{
-      const card=document.createElement("div");
-      card.className="pcard"+(i===turn&&!over?" active":"");
-      card.style.setProperty("--pc",p.color);
-      card.innerHTML =
-        `<div class="rowtop">
-           <span class="swatch" style="background:${p.color}"></span>
-           <span class="pname">${escapeHtml(p.name)}</span>
-           <span class="score">${p.score}</span>
-         </div>
-         <div class="tally">${"<i></i>".repeat(p.score)}</div>
-         <div class="turn-tag">Playing now</div>`;
-      wrap.append(card);
-    });
-  }
-
   /* ---------- game over ---------- */
+  let overShown = false;
   function showGameOver(){
-    const sorted=[...players].sort((a,b)=>b.score-a.score);
-    const top=sorted[0].score;
-    const winners=sorted.filter(p=>p.score===top);
-    $("winnerLine").textContent = winners.length>1
-      ? "It's a tie between "+winners.map(w=>w.name).join(" & ")+"!"
-      : sorted[0].name+" takes the grid with "+top+" squares!";
-    const ol=$("standings");
-    ol.innerHTML="";
+    if(overShown) return;
+    overShown = true;
+    const sorted = S.players.filter(Boolean).slice().sort((a,b)=>b.score-a.score);
+    const top = sorted[0].score;
+    const winners = sorted.filter(p=>p.score===top);
+    $("winnerLine").textContent = winners.length > 1
+      ? "It's a tie between " + winners.map(w=>w.name).join(" & ") + "!"
+      : sorted[0].name + " takes the grid with " + top + " squares!";
+    const ol = $("standings");
+    ol.innerHTML = "";
     sorted.forEach(p=>{
-      const li=document.createElement("li");
-      li.innerHTML=`<span class="swatch" style="background:${p.color}"></span>
-        <span class="s-name">${escapeHtml(p.name)}</span><span>${p.score}</span>`;
+      const li = document.createElement("li");
+      li.innerHTML = `<span class="swatch" style="background:${p.color}"></span>
+        <span class="s-name">${esc(p.name)}</span><span>${p.score}</span>`;
       ol.append(li);
     });
     $("overlay").classList.add("show");
     if(!REDUCED){
-      const frame=$("boardFrame"), fr=frame.getBoundingClientRect();
-      const cols=players.map(p=>p.color);
+      const frame = $("boardFrame"), fr = frame.getBoundingClientRect();
+      const cols = S.players.filter(Boolean).map(p=>p.color);
       for(let i=0;i<40;i++){
         setTimeout(()=>{
-          const s=document.createElement("span");
-          s.className="particle";
-          s.style.background=cols[i%cols.length];
-          s.style.left=(Math.random()*fr.width)+"px"; s.style.top="-10px";
+          const s = document.createElement("span");
+          s.className = "particle";
+          s.style.background = cols[i%cols.length];
+          s.style.left = (Math.random()*fr.width)+"px"; s.style.top = "-10px";
           frame.append(s);
           s.animate([{transform:"translateY(0) rotate(0)",opacity:1},
                      {transform:`translateY(${fr.height*0.9}px) rotate(${300+Math.random()*300}deg)`,opacity:0}],
-                    {duration:1400+Math.random()*800,easing:"ease-in"}).onfinish=()=>s.remove();
+                    {duration:1400+Math.random()*800,easing:"ease-in"}).onfinish = ()=>s.remove();
         }, i*35);
       }
     }
   }
 
-  function escapeHtml(s){
+  function esc(s){
     return String(s).replace(/[&<>"']/g, ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   }
 
-  renderNames();
   connect();
 })();
 </script>
