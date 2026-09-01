@@ -145,24 +145,72 @@
   }
   svg#board{display:block;width:100%;height:auto;touch-action:manipulation}
 
-  .turn-bar{margin:0 0 12px}
+  /* ---------- turn bar & hourglass ---------- */
+  .turn-bar{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    margin:0 0 16px;min-height:58px;
+  }
   .turn-line{
-    display:flex;align-items:center;gap:10px;justify-content:center;
-    font-weight:700;font-size:1.05rem;margin-bottom:8px;flex-wrap:wrap;
+    display:flex;align-items:center;gap:10px;
+    font-weight:700;font-size:1.05rem;flex-wrap:wrap;justify-content:center;
   }
   .turn-line .swatch{width:18px;height:18px;border-radius:5px}
   .turn-line .turn-name{font-family:"Caveat",cursive;font-size:1.55rem;font-weight:700}
   .clock{
     font-family:"Caprasimo",serif;font-size:1.15rem;font-variant-numeric:tabular-nums;
-    min-width:3.2ch;text-align:right;
+    min-width:3.2ch;
   }
   .clock.low{color:var(--warn)}
-  .timer-track{height:6px;border-radius:99px;background:var(--rule);overflow:hidden}
-  .timer-fill{
-    height:100%;border-radius:99px;background:var(--turn);
-    width:100%;transition:width .25s linear;
+
+  .hourglass{width:34px;height:50px;flex:none;overflow:visible}
+  .hg-glass{fill:none;stroke:var(--ink-faint);stroke-width:1.5;stroke-linejoin:round}
+  .hg-cap{fill:var(--ink-faint)}
+  .hg-sand{fill:var(--turn)}
+  .hg-stream{stroke:var(--turn);stroke-width:1.8;stroke-linecap:round;opacity:.85}
+  .hourglass.low .hg-sand{fill:var(--warn)}
+  .hourglass.low .hg-stream{stroke:var(--warn)}
+  .hourglass.low{animation:hgShake .5s ease-in-out infinite}
+  @keyframes hgShake{
+    0%,100%{transform:translateX(0) rotate(0deg)}
+    25%{transform:translateX(-1.5px) rotate(-3deg)}
+    75%{transform:translateX(1.5px) rotate(3deg)}
   }
-  .timer-fill.low{background:var(--warn)}
+  .hourglass.flip #hgBody{animation:hgFlip .55s cubic-bezier(.35,.9,.35,1)}
+  @keyframes hgFlip{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(360deg)}
+  }
+  #hgBody{transform-origin:20px 29px}
+
+  /* ---------- reactions ---------- */
+  .react-row{
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+    margin:14px auto 0;padding:8px 10px;max-width:560px;
+    background:var(--card);border:1px solid var(--rule);border-radius:999px;
+    box-shadow:var(--shadow);
+  }
+  .react-btn{
+    display:flex;flex-direction:column;align-items:center;gap:1px;
+    border:none;background:none;cursor:pointer;padding:5px 8px;border-radius:12px;
+    font:inherit;line-height:1;transition:background .15s, transform .12s;
+  }
+  .react-btn .rx-emoji{font-size:1.4rem}
+  .react-btn .rx-label{
+    font-size:.6rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .react-btn:hover{background:color-mix(in srgb, var(--btn) 14%, transparent);transform:translateY(-2px)}
+  .react-btn:hover .rx-label{color:var(--ink)}
+  .react-btn:active{transform:translateY(0) scale(.94)}
+  .react-btn:focus-visible{outline:2px solid var(--btn);outline-offset:2px}
+
+  #flyLayer{position:fixed;inset:0;pointer-events:none;z-index:70;overflow:hidden}
+  .fly{position:absolute;font-size:1.7rem;will-change:transform,opacity;user-select:none}
+  .fly-name{
+    position:absolute;font-family:"Caveat",cursive;font-size:1.15rem;font-weight:700;
+    color:var(--ink);background:var(--card);border:1px solid var(--rule);
+    padding:1px 9px;border-radius:999px;white-space:nowrap;box-shadow:var(--shadow);
+  }
 
   .edge .hit{stroke:transparent;stroke-width:22;cursor:pointer}
   .edge .stroke{stroke:transparent;stroke-width:7;stroke-linecap:round;pointer-events:none}
@@ -305,14 +353,27 @@
   <!-- 3. GAME -->
   <section id="screen-game">
     <div class="turn-bar">
+      <svg class="hourglass" id="hourglass" viewBox="0 0 40 58" aria-hidden="true">
+        <g id="hgBody">
+          <clipPath id="clipTop"><rect id="rTop" x="3" y="8" width="34" height="21"/></clipPath>
+          <clipPath id="clipBot"><rect id="rBot" x="3" y="52" width="34" height="0"/></clipPath>
+          <path class="hg-sand" d="M7 8 L33 8 L20 28 Z" clip-path="url(#clipTop)"/>
+          <path class="hg-sand" d="M20 30 L33 51 L7 51 Z" clip-path="url(#clipBot)"/>
+          <line class="hg-stream" id="hgStream" x1="20" y1="28" x2="20" y2="49"/>
+          <path class="hg-glass" d="M7 8 L33 8 L20 28 Z"/>
+          <path class="hg-glass" d="M20 30 L33 51 L7 51 Z"/>
+          <rect class="hg-cap" x="4" y="3" width="32" height="5" rx="2.5"/>
+          <rect class="hg-cap" x="4" y="51" width="32" height="5" rx="2.5"/>
+        </g>
+      </svg>
       <div class="turn-line" id="turnLine"></div>
-      <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
     </div>
     <div class="game-wrap">
       <div class="board-col">
         <div class="board-frame" id="boardFrame">
           <svg id="board" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
+        <div class="react-row" id="reactRow" aria-label="Send a reaction"></div>
       </div>
       <aside class="panel">
         <h2>Scorecard</h2>
@@ -329,6 +390,8 @@
     </div>
   </section>
 </main>
+
+<div id="flyLayer" aria-hidden="true"></div>
 
 <div id="toast" role="status" aria-live="polite"></div>
 
@@ -452,8 +515,10 @@
     es.onerror = ()=>{ live=false; paintConn(); };
     es.onmessage = (e)=>{
       let m; try{ m=JSON.parse(e.data); }catch(err){ return; }
-      if(!m || !m.state) return;
+      if(!m) return;
       live = true;
+      if(m.reaction){ flyReaction(m.reaction.emoji, m.reaction.name); return; }
+      if(!m.state) return;
       skew = m.state.now - Date.now();
       apply(m.state);
     };
@@ -525,6 +590,7 @@
   function renderGame(prev){
     const key = S.N + ":" + S.seats + ":" + S.players.map(p=>p&&p.name).join(",");
     if(key !== renderedKey){ buildBoard(); renderedKey = key; }
+    buildReactRow();
 
     paintBoard();
     renderScores();
@@ -711,25 +777,139 @@
     tickClock();
   }
 
+  /* Hourglass: top chamber drains 8→28, bottom pile grows up from y=51. */
+  const HG_TOP_Y = 8, HG_NECK_Y = 28, HG_BASE_Y = 51;
+  const HG_SPAN = HG_NECK_Y - HG_TOP_Y;
+
+  function paintHourglass(frac, low){
+    const hg = $("hourglass");
+    const rTop = $("rTop"), rBot = $("rBot"), stream = $("hgStream");
+    if(!hg || !rTop) return;
+
+    // Sand still in the top sits above the neck; its surface drops as time runs out.
+    const surfaceY = HG_TOP_Y + (1 - frac) * HG_SPAN;
+    rTop.setAttribute("y", surfaceY.toFixed(2));
+    rTop.setAttribute("height", Math.max(0, HG_NECK_Y - surfaceY).toFixed(2));
+
+    // Pile in the bottom chamber grows from the base upward.
+    const pileH = (1 - frac) * (HG_BASE_Y - 30);
+    rBot.setAttribute("y", (HG_BASE_Y - pileH).toFixed(2));
+    rBot.setAttribute("height", pileH.toFixed(2));
+
+    // Falling stream only while sand is actually moving.
+    const running = frac > 0.005 && frac < 0.995;
+    stream.style.display = running ? "" : "none";
+    stream.setAttribute("y2", (HG_BASE_Y - pileH).toFixed(2));
+
+    hg.classList.toggle("low", low);
+  }
+
+  let lastTurnStart = null;
+  function flipHourglass(){
+    const hg = $("hourglass");
+    if(!hg || REDUCED) return;
+    hg.classList.remove("flip");
+    void hg.offsetWidth;
+    hg.classList.add("flip");
+    setTimeout(()=>hg.classList.remove("flip"), 600);
+  }
+
   function tickClock(){
+    const clock = $("clock");
     if(!S || S.phase !== "playing" || !S.turnStartedAt){
-      $("timerFill").style.width = "0%";
+      paintHourglass(0, false);
       return;
+    }
+    if(S.turnStartedAt !== lastTurnStart){
+      if(lastTurnStart !== null) flipHourglass();
+      lastTurnStart = S.turnStartedAt;
     }
     const elapsed = (Date.now() + skew) - S.turnStartedAt;
     const left = Math.max(0, S.turnMs - elapsed);
     const secs = Math.ceil(left/1000);
-    const pct = Math.max(0, Math.min(100, (left/S.turnMs)*100));
-    const clock = $("clock");
-    const fill = $("timerFill");
+    const frac = Math.max(0, Math.min(1, left/S.turnMs));
+    const low = secs <= 5;
     if(clock){
       clock.textContent = secs + "s";
-      clock.classList.toggle("low", secs <= 10);
+      clock.classList.toggle("low", low);
     }
-    fill.style.width = pct + "%";
-    fill.classList.toggle("low", secs <= 10);
+    paintHourglass(frac, low);
   }
-  setInterval(tickClock, 250);
+  setInterval(tickClock, 100);
+
+  /* ---------- reactions ---------- */
+  const REACTIONS = [
+    {e:"🍅", label:"booo"},
+    {e:"😭", label:"sobbing"},
+    {e:"💀", label:"lol"},
+    {e:"😏", label:"gotcha"},
+    {e:"🫠", label:"damn"},
+    {e:"🔥", label:"slay"},
+    {e:"😱", label:"no way"},
+    {e:"🤡", label:"clown"}
+  ];
+
+  let lastReactSent = 0;
+  function buildReactRow(){
+    const row = $("reactRow");
+    if(row.childElementCount) return;
+    REACTIONS.forEach(r=>{
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "react-btn";
+      b.title = r.label;
+      b.setAttribute("aria-label", "React " + r.label);
+      b.innerHTML = `<span class="rx-emoji">${r.e}</span><span class="rx-label">${r.label}</span>`;
+      b.addEventListener("click", ()=>{
+        const now = Date.now();
+        if(now - lastReactSent < 450) return;
+        lastReactSent = now;
+        post("/react", {token: myToken, emoji: r.e});
+      });
+      row.append(b);
+    });
+  }
+
+  function flyReaction(emoji, name){
+    if(REDUCED) return;
+    const layer = $("flyLayer");
+    const row = $("reactRow");
+    const r = row.getBoundingClientRect();
+    const originX = r.left + r.width/2;
+    const originY = r.top;
+
+    for(let i=0;i<7;i++){
+      const s = document.createElement("span");
+      s.className = "fly";
+      s.textContent = emoji;
+      s.style.left = (originX + (Math.random()*200 - 100)) + "px";
+      s.style.top  = originY + "px";
+      layer.append(s);
+      const dx = Math.random()*90 - 45;
+      const dy = -(200 + Math.random()*230);
+      const rot = Math.random()*90 - 45;
+      s.animate([
+        {transform:"translate(0,0) scale(.5)", opacity:0},
+        {transform:`translate(${dx*0.35}px,${dy*0.3}px) scale(1.2)`, opacity:1, offset:.22},
+        {transform:`translate(${dx}px,${dy}px) rotate(${rot}deg) scale(.95)`, opacity:0}
+      ], {duration:1500 + Math.random()*700, easing:"cubic-bezier(.25,.55,.3,1)", delay:i*80})
+       .onfinish = ()=>s.remove();
+    }
+
+    if(name){
+      const tag = document.createElement("span");
+      tag.className = "fly-name";
+      tag.textContent = name;
+      tag.style.left = (originX - 24) + "px";
+      tag.style.top  = (originY - 6) + "px";
+      layer.append(tag);
+      tag.animate([
+        {transform:"translateY(0) scale(.8)", opacity:0},
+        {transform:"translateY(-26px) scale(1)", opacity:1, offset:.25},
+        {transform:"translateY(-96px) scale(.95)", opacity:0}
+      ], {duration:1500, easing:"cubic-bezier(.25,.55,.3,1)"}).onfinish = ()=>tag.remove();
+    }
+  }
 
   /* ---------- scorecard with gate-5 tally ---------- */
   function tallyGroup(count, color){
