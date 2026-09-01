@@ -203,10 +203,11 @@
 
   /* ---------- toast ---------- */
   #toast{
-    position:fixed;left:50%;top:22px;transform:translate(-50%,-16px);
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);
     background:var(--ink);color:var(--paper);padding:10px 22px;border-radius:999px;
-    box-shadow:var(--shadow);font-family:"Caveat",cursive;font-size:1.45rem;font-weight:700;
-    opacity:0;pointer-events:none;z-index:60;white-space:nowrap;
+    box-shadow:0 6px 24px rgba(0,0,0,.28);
+    font-family:"Caveat",cursive;font-size:1.45rem;font-weight:700;
+    opacity:0;pointer-events:none;z-index:60;white-space:nowrap;max-width:92vw;
     transition:opacity .18s, transform .18s;
   }
   #toast.show{opacity:1;transform:translate(-50%,0)}
